@@ -11,7 +11,7 @@ Allows for the following operations: <br>
 - Adding a **child** grid to a given grid, in a given position within the parent grid. It gives a fine-grained control over a given "region" of the parent grid. The child grid inherits the number of columns from the parent, but in fact it can have any number of columns up to the width of the parent grid. Reserving a segment in the child grid will reserve the corresponding segment in the parent. Same time complexity as creating a new grid.
 
   
-The linear factor in the time complexities is necessary for the randomized queries to work. However, it becomes negligible if you actually do something later with the reserved positions. Then, due to the disjointness of the reserved segments, you use the same time as all the linear factors of the queries combined, so my solution becomes almost linear.
+The linear factor in the time complexities is necessary for the randomized queries to work. I believe it's impossible to get rid of it unless you remove either all horizontal segment queries or all vertical segment queries. However, these factors become negligible if you actually do something later with the reserved positions. Then, due to the disjointness of the reserved segments, you use the same time as all the linear factors of the queries combined, so my solution takes "logarithmically" more time than that.
 ## Future:
 - The internal data structures can be used to allow the user to make segments *free* again!
 - These operations will have the same time complexity as the current
