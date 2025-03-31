@@ -47,7 +47,6 @@ public class PartialSegmentHandler {
 
     public GridSegment reserveRandomFitting(int length) {
         int total = segmentsByLength.countFittingSpaces(length);
-        System.out.println("spaces of length "+length+": "+segmentsByLength.countFittingSpaces(length));
         int k = new Random().nextInt(total)+1;
         GridSegment found = segmentsByLength.getKthFittingSpace(length,k);
         reserve(found.row, found.col, length);

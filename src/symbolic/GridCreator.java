@@ -76,12 +76,23 @@ public class GridCreator {
 
 
     public static void main(String[] args) {
-        GridCreator cr0 = new GridCreator(1,2);
+        GridCreator parent = new GridCreator(7,5);
+        parent.reserveVertical(2,2,2);
+        parent.reserveHorizontal(1,1,4);
 
-        cr0.reserveRandomFittingHorizontal(2);
+        parent.printGrid();
+        System.out.println("\n-------------------------\n");
 
-        cr0.printGrid();
+        parent.reserveRandomFittingHorizontal(3);
+        parent.printGrid();
+        System.out.println("\n-------------------------\n");
 
+        GridCreator child = new GridCreator(4,5,parent,3);
+        child.reserveVertical(4,5,1);
+        parent.printGrid();
+
+        child.destroy();
+        parent.destroy();
     }
 
 }
