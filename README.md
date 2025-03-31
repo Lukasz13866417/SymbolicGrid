@@ -44,7 +44,7 @@ parent.printGrid();
 ```
 
 ```Java
-parent.reserveRandomFittingHorizontal(3);
+GridSegment randomFitting = parent.reserveRandomFittingHorizontal(3);
 parent.printGrid();
 ```
 
