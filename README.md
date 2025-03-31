@@ -1,44 +1,74 @@
-# Robust API for logarithmic-time 2D grid queries
-The grid can be used to represent a maze, or any layout of non-overlapping "tiles" in any system where **randomization** is needed. A position in the grid is either *reserved* or *free*.
-I used this as part of my custom, sophisticated terrain generation API for my game. See: [project repo](https://github.com/Lukasz13866417/Game3D_OpenGL) <br>
-To use this API, simply copy the package "symbolic" into your project - it has everything needed, including the ```GridCreator``` class.
-## Supported queries:
-- Creating a 2D grid with a set number of rows and columns. Every posotion is initially *free*. $O((n + m)log(n+m))$ time, where $n$ is the number of rows and $m$ - the number of columns.
-- Reserving a given (by start position and length) vertical segment in the grid. Throws error if a *reserved* position already lies within that segment. $O(log(n+m)d)$ time, where $d$ is the length of reserved segment.
-- Reserving (and returning) a *random, uniformly picked* vertical segment in the grid that has a given length, and is entirely *free*. $O(log(n+m)d)$ 
-- Reserving a given horizontal segment, with the same semantics as the corresponding query with vertical segments. $O(log(n+m)d)$ 
-- Reserving (and returning) a random horizontal segment that has a given length, in the same was as the corresponding query with vertical segments. $O(log(n+m)d)$ 
-- Adding a **child** grid to a given grid, in a given position within the parent grid. It gives a fine-grained control over a given "region" of the parent grid. The child grid inherits the number of columns from the parent. Reserving a segment in the child grid will reserve the corresponding segment in the parent. *For now*, the area in the parent grid has to be entirely free. Same time complexity as creating a new grid.
-## Example usage:
+---
+
+# Robust API for Logarithmic-Time 2D Grid Queries
+
+The grid can be used to represent a maze or any layout of non-overlapping "tiles" in systems where **randomization** is needed. In this grid, a position is either *reserved* or *free*. I used this as part of my custom, sophisticated terrain generation API for my game. See: [project repo](https://github.com/Lukasz13866417/Game3D_OpenGL)
+
+To use this API, simply copy the package `symbolic` into your project. It includes everything you need, including the `GridCreator` class. There are no external dependencies.
+
+## Supported Queries
+
+- **Creating a Grid:**  
+  Create a 2D grid with a specified number of rows and columns. Every position is initially *free*.  
+  **Time Complexity:** $O((n + m)\log(n+m))$, where $n$ is the number of rows and $m$ is the number of columns.
+
+- **Reserving Vertical Segments:**  
+  Reserve a vertical segment (given start position and length) in the grid. Throws an error if any position within the segment is already *reserved*.  
+  **Time Complexity:** $O(\log(n+m)d)$, where $d$ is the length of the segment.
+
+- **Reserving Random Vertical Segments:**  
+  Reserve (and return) a *random, uniformly picked* vertical segment of a given length that is entirely *free*.  
+  **Time Complexity:** $O(\log(n+m)d)$
+
+- **Reserving Horizontal Segments:**  
+  Reserve a horizontal segment with the same semantics as the vertical query.  
+  **Time Complexity:** $O(\log(n+m)d)$
+
+- **Reserving Random Horizontal Segments:**  
+  Reserve (and return) a random horizontal segment of a given length that is entirely *free*.  
+  **Time Complexity:** $O(\log(n+m)d)$
+
+- **Adding a Child Grid:**  
+  Add a **child** grid to a given grid at a specified position within the parent grid. The child grid inherits the number of columns from the parent. Reserving a segment in the child grid will reserve the corresponding segment in the parent. *For now*, the area in the parent grid must be entirely free.  
+  **Time Complexity:** Same as creating a new grid.
+
+## Example Usage
+
 ### Code:
+
 ```Java
 // Create grid with 7 rows, 5 cols
-GridCreator parent = new GridCreator(7,5);
-parent.reserveVertical(2,2,2);
-parent.reserveHorizontal(1,1,4);
+GridCreator parent = new GridCreator(7, 5);
+parent.reserveVertical(2, 2, 2);
+parent.reserveHorizontal(1, 1, 4);
 
 parent.printGrid();
 ```
+
 ```Java
 parent.reserveRandomFittingHorizontal(3);
 parent.printGrid();
 ```
+
 ```Java
 // Create child grid - 4 rows, 5 cols
-// It will be inside the first grid, with offset 3
-// So, it will cover rows 4,5,6,7.
-GridCreator child = new GridCreator(4,5,parent,3);
-// Position (4,5) in child is (7,5) in parent.
-child.reserveVertical(4,5,1);
-parent.printGrid(); 
+// It will be inside the first grid, with an offset of 3,
+// covering rows 4, 5, 6, and 7.
+GridCreator child = new GridCreator(4, 5, parent, 3);
+// Position (4,5) in the child grid corresponds to (7,5) in the parent grid.
+child.reserveVertical(4, 5, 1);
+parent.printGrid();
 ```
-Remember to do this when you're done:
+
+Remember to clean up after you're done:
+
 ```Java
 child.destroy();
 parent.destroy();
 ```
 
 ### Output:
+
 ```
 ####.
 .#...
@@ -48,6 +78,7 @@ parent.destroy();
 .....
 .....
 ```
+
 ```
 ####.
 .#...
@@ -57,6 +88,7 @@ parent.destroy();
 ###..
 .....
 ```
+
 ```
 ####.
 .#...
@@ -66,20 +98,40 @@ parent.destroy();
 ###..
 ....#
 ```
-### Note!
-When you're done using a specific instance of ```GridCreator```, call ```destroy()``` on it! The grid creator uses preallocation in its data structures to give the best possible performance - increasing cache locality and decrasing the number of allocations. If the preallocated pool of memory runs out, it's resized. Destroying will allow the preallocated memory to be reused. Not doing this will simply cause more resizings. **However, feel free** to change the amount of pre-allocated memory in the code. Since the memory pool is resized just like the array used internally in an ```ArrayList```, setting the pre-allocated size to something small will introduce minimal overhead, while still providing a logarithmic number or resizings (but now a few times more). 
-## Future
-Although the main functionality has been achieved, more queries can still be added!
-- For instance, the internal data structures can be used to allow the user to make segments *free* again, with the same time complexity as any current segment query.
-- It's **easy** to modify the ```GridCreator``` class to allow the child grid to be created in an area that is *not* entirely free.
-- It's also **easy** to modify the ```GridCreator```, so that children can have different number of columns than the parent grid and be placed *anywhere* within the parent grid.
-- It's *possible* to add a  query that increases the number of rows. Time complexities will be unchanged, but the constant factor will grow signicantly due to a new data structure. 
-## Internal data structures used (overview):
-- **Sparse segment trees** with advanced queries, using **hashing** to represent information about the *free* subsegments (but only the ones that can't be extended - from each side they either touch the border or a *reserved* position)
-- **Preallocated Node Pool** for the segment tree to avoid frequent allocations and annoying the Java Garbage Collector.
-- **Balanced BST** storing information about the end position of mentioned free segments. 
-### Why the $d$ factors don't matter in practice:
-However, the $d$ factors are negligible if you actually do something later with the reserved positions. Due to the obvious disjointness of the reserved segments, you put in the same amount of time as the all the $d$ factors in the performed queries. In that case, my solution only takes "logarithmically" more time than the amount of time you took anyway in order to process the obtained results.
-<br><br>
-Moreover, if you decide to first only perform horizontal segment queries, and after that only vertical segment queries (or the other way around), this structure can be easily modified to get completely logarithmic time. That's because the most important class in the implementation, the ```PartialSegementHandler```, does all types of queries for just one "orientation" of segments (all vertical / all horizontal) and does everything in logarithmic time. I will outline how to do that in the future (or provide the modified version's code)<br>
 
+### Note
+
+When you're done using a specific instance of `GridCreator`, call `destroy()` on it! The class uses preallocation in its data structures to optimize performance by increasing cache locality and reducing allocations. If the preallocated pool of memory runs out, it will resize. Calling `destroy()` allows the memory to be reused. Not doing so may cause extra resizings. You are welcome to adjust the preallocated memory size in the code. A smaller preallocation size introduces minimal overhead while maintaining a logarithmic number of resizings.
+
+## Future Enhancements
+
+- **Freeing Segments:**  
+  Allow users to make segments *free* again, with the same time complexity as current queries.
+
+- **Flexible Child Grids:**  
+  Modify `GridCreator` to allow the child grid to be created in an area that is not entirely free, or to have a different number of columns than the parent and be placed anywhere within it.
+
+- **Dynamic Row Increases:**  
+  Add a query to increase the number of rows. While the time complexities remain the same, the constant factors may grow due to the new data structure requirements.
+
+## Internal Data Structures Overview
+
+- **Sparse Segment Trees:**  
+  Advanced queries using **hashing** to represent the *free* subsegments (only those that can't be extended—i.e., from each side they either touch the border or a *reserved* position).
+
+- **Preallocated Node Pool:**  
+  This helps avoid frequent allocations and minimizes the impact on the Java Garbage Collector.
+
+- **Balanced BST:**  
+  Stores information about the end positions of the free segments.
+
+### Note on $d$ in Time Complexity
+
+The $d$ factors are negligible if you perform further operations on the reserved positions. Given the disjoint nature of the reserved segments, the overhead is proportional to the amount of processing done on the resulting segments. If you choose to perform only horizontal queries followed by vertical ones (or vice versa), the structure can be further modified to achieve completely logarithmic time by utilizing the `PartialSegementHandler` class, which handles all queries for one orientation in logarithmic time. I plan to outline this enhancement or provide modified code in the future.
+
+## License
+
+This project is licensed under the **Creative Commons Attribution 4.0 International License**.  
+You are free to share and adapt the material as long as you provide proper attribution. For more details, please see the [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
+
+---
