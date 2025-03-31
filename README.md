@@ -8,7 +8,7 @@ Allows for the following operations: <br>
 - Reserving (and returning) a *random, uniformly picked* vertical segment in the grid that has a given length, and is entirely *free*. $O(log(n+m)d)$ 
 - Reserving a given horizontal segment, with the same semantics as the corresponding query with vertical segments. $O(log(n+m)d)$ 
 - Reserving (and returning) a random horizontal segment that has a given length, in the same was as the corresponding query with vertical segments. $O(log(n+m)d)$ 
-- Adding a **child** grid to a given grid, in a given place. It gives a fine-grained control over a given "region" of the parent grid. The child grid inherits the number of columns from the parent, but in fact it can have any number of columns up to the width of the parent grid. Reserving a segment in the child grid will reserve the corresponding segment in the parent. Same time complexity as creating a new grid (because it's done through creating a new grid and telling it who the parent is, as well as the relative position within the parent).
+- Adding a **child** grid to a given grid, in a given position within the parent grid. It gives a fine-grained control over a given "region" of the parent grid. The child grid inherits the number of columns from the parent, but in fact it can have any number of columns up to the width of the parent grid. Reserving a segment in the child grid will reserve the corresponding segment in the parent. Same time complexity as creating a new grid.
 ## Future:
 - The internal data structures can be used to allow the user to make segments *free* again!
 - These operations will have the same time complexity as the current
