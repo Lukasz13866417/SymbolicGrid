@@ -1,7 +1,6 @@
 # Robust API for logarithmic-time 2D grid queries
 The grid can be used to represent a maze, or any layout of non-overlapping "tiles" in any system where **randomization** is needed. A position in the grid is either *reserved* or *free*.
 I used this as part of my custom, sophisticated terrain generation API for my game. See: [project repo](https://github.com/Lukasz13866417/Game3D_OpenGL) <br>
-Allows for the following operations: <br>
 ## Supported queries:
 - Creating a 2D grid with a set number of rows and columns. Every posotion is initially *free*. $O((n + m)log(n+m))$ time, where $n$ is the number of rows and $m$ - the number of columns.
 - Reserving a given (by start position and length) vertical segment in the grid. Throws error if a *reserved* position already lies within that segment. $O(log(n+m)d)$ time, where $d$ is the length of reserved segment.
