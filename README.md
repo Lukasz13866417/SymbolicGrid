@@ -125,7 +125,8 @@ When you're done using a specific instance of `GridCreator`, call `destroy()` on
 
 ### Note on $d$ in Time Complexity
 
-The $d$ factors are negligible if you perform further operations on the reserved positions. Given the disjoint nature of the reserved segments, the overhead is proportional to the amount of processing done on the resulting segments. If you choose to perform only horizontal queries followed by vertical ones (or vice versa), the structure can be further modified to achieve completely logarithmic time by utilizing the `PartialSegementHandler` class, which handles all queries for one orientation in logarithmic time. I plan to outline this enhancement or provide modified code in the future.
+The $d$ factors are negligible if you perform further operations on the reserved positions. Given the disjoint nature of the reserved segments, the overhead is proportional to the amount of processing done on the resulting segments. <br>
+If you choose to perform only horizontal queries followed by vertical ones (or vice versa), the structure can be further modified to achieve completely logarithmic time by utilizing the `PartialSegementHandler` class, which handles all queries for one orientation in logarithmic time. I plan to outline this enhancement or provide modified code in the future.
 
 ## License
 
