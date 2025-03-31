@@ -9,8 +9,9 @@ I used this as part of my custom, sophisticated terrain generation API for my ga
 - Reserving (and returning) a random horizontal segment that has a given length, in the same was as the corresponding query with vertical segments. $O(log(n+m)d)$ 
 - Adding a **child** grid to a given grid, in a given position within the parent grid. It gives a fine-grained control over a given "region" of the parent grid. The child grid inherits the number of columns from the parent, but in fact it can have any number of columns up to the width of the parent grid. Reserving a segment in the child grid will reserve the corresponding segment in the parent. Same time complexity as creating a new grid.
 ## Future:
-- The internal data structures can be used to allow the user to make segments *free* again!
-- These operations will have the same time complexity as the current ones
+- Although the main functionality has been achieved, more queries can still be added!
+- For instance, the internal data structures can be used to allow the user to make segments *free* again, with the same time complexity as any current segment query. 
+- A query that increases the number of rows can also be added, although that would require swapping out one of the internal data structures for a more powerful one. Time complexities will be unchanged, but the constant factor will grow signicantly.
 ## Internal data structures used (overview):
 - **Sparse segment trees** with advanced queries, using **hashing** to represent information about the *free* subsegments (but only the ones that can't be extended - from each side they either touch the border or a *reserved* position)
 - **Preallocated Node Pool** for the segment tree to avoid frequent allocations and annoying the Java Garbage Collector.
