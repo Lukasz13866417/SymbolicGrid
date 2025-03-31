@@ -21,7 +21,6 @@ parent.printGrid();
 ```Java
 parent.reserveRandomFittingHorizontal(3);
 parent.printGrid();
-System.out.println("\n-------------------------\n");
 ```
 ```Java
 GridCreator child = new GridCreator(4,5,parent,3);
