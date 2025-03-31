@@ -17,21 +17,25 @@ parent.reserveVertical(2,2,2);
 parent.reserveHorizontal(1,1,4);
 
 parent.printGrid();
-System.out.println("\n-------------------------\n");
-
+```
+```Java
 parent.reserveRandomFittingHorizontal(3);
 parent.printGrid();
 System.out.println("\n-------------------------\n");
-
+```
+```Java
 GridCreator child = new GridCreator(4,5,parent,3);
 child.reserveVertical(4,5,1);
 parent.printGrid(); 
-
+```
+Remember to do this when you're done:
+```Java
 child.destroy();
 parent.destroy();
 ```
+
 ### Output:
-```Java
+```
 ####.
 .#...
 .#...
@@ -39,8 +43,6 @@ parent.destroy();
 .....
 .....
 .....
-
--------------------------
 
 ####.
 .#...
@@ -49,8 +51,6 @@ parent.destroy();
 .....
 ###..
 .....
-
--------------------------
 
 ####.
 .#...
