@@ -62,7 +62,7 @@ parent.destroy();
 ....#
 ```
 ### Note!
-When you're done using a specific instance of ```GridCreator```, call ```destroy()``` on it! The grid creator uses preallocation in its data structures to give the best possible performance (if the preallocated pool of memory runs out, it's resized). Destroying will allow the preallocated memory to be reused. Not doing this will simply cause more resizings. **However, feel free** to change the amount of pre-allocated memory in the code. Since the memory pool is resized just like the array used internally in an ```ArrayList```, setting the pre-allocated size to something small will introduce minimal overhead, while still providing a logarithmic number or resizings (but now a few times more). 
+When you're done using a specific instance of ```GridCreator```, call ```destroy()``` on it! The grid creator uses preallocation in its data structures to give the best possible performance - increasing cache locality and decrasing the number of allocations. If the preallocated pool of memory runs out, it's resized. Destroying will allow the preallocated memory to be reused. Not doing this will simply cause more resizings. **However, feel free** to change the amount of pre-allocated memory in the code. Since the memory pool is resized just like the array used internally in an ```ArrayList```, setting the pre-allocated size to something small will introduce minimal overhead, while still providing a logarithmic number or resizings (but now a few times more). 
 ## Future
 Although the main functionality has been achieved, more queries can still be added!
 - For instance, the internal data structures can be used to allow the user to make segments *free* again, with the same time complexity as any current segment query.
