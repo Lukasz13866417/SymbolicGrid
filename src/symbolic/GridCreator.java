@@ -76,16 +76,11 @@ public class GridCreator {
 
 
     public static void main(String[] args) {
-        GridCreator cr0 = new GridCreator(18,9);
-        GridCreator cr1 = new GridCreator(9,9,cr0,9);
-        cr1.reserveRandomFittingVertical(3);
-        cr1.reserveRandomFittingVertical(6);
-        cr1.reserveRandomFittingHorizontal(3);
-        cr1.reserveRandomFittingHorizontal(3);
+        GridCreator cr0 = new GridCreator(1,2);
+
+        cr0.reserveRandomFittingHorizontal(2);
 
         cr0.printGrid();
-        System.out.println();
-        cr1.printGrid();
 
     }
 

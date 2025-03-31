@@ -1,6 +1,8 @@
 package symbolic.segments;
 
 import symbolic.GridSegment;
+import symbolic.segments.by_length.segtree_implementation.PreallocatedHashedSegmentsByLengthNodes;
+import symbolic.segments.by_length.SegmentsByLength;
 
 import java.util.Random;
 
@@ -45,6 +47,7 @@ public class PartialSegmentHandler {
 
     public GridSegment reserveRandomFitting(int length) {
         int total = segmentsByLength.countFittingSpaces(length);
+        System.out.println("spaces of length "+length+": "+segmentsByLength.countFittingSpaces(length));
         int k = new Random().nextInt(total)+1;
         GridSegment found = segmentsByLength.getKthFittingSpace(length,k);
         reserve(found.row, found.col, length);
@@ -60,7 +63,7 @@ public class PartialSegmentHandler {
             GridSegment curr = segmentsByEndPosition.tree.pollFirst();
             segmentsByLength.delete(curr.row,curr.col,curr.length);
         }
-        segmentsByLength.freeArraysIfCleanedUp();
+        segmentsByLength.destroy();
     }
 
 
