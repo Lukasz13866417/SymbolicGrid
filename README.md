@@ -16,5 +16,7 @@ I used this as part of my custom, sophisticated terrain generation API for my ga
 - **Preallocated Node Pool** for the segment tree to avoid frequent allocations and annoying the Java Garbage Collector.
 - **Balanced BST** storing information about the end position of mentioned free segments. Currently a bulitin tree set.
 ### Why the $d$ factors don't matter in practice:
-Removing either all horizontal segment queries or all vertical segment queries would **remove this factor** from all queries. The most important class in the implementation, the ```PartialSegementHandler```, does queries for just one "orientation" of segments (all vertical / all horizontal) and does everything in logarithmic time. <br>
 However, the $d$ factors are negligible if you actually do something later with the reserved positions. Due to the obvious disjointness of the reserved segments, you put in the same amount of time as the all the $d$ factors in the performed queries. In that case, my solution only takes "logarithmically" more time than the amount of time you took anyway in order to process the obtained results.
+<br>
+Moreover, if you decide to first only perform horizontal segment queries, then only vertical segment queries (or the other way around), this structure can be easily modified to get completely logarithmic time. That's because the most important class in the implementation, the ```PartialSegementHandler```, does all types of queries for just one "orientation" of segments (all vertical / all horizontal) and does everything in logarithmic time. <br>
+
