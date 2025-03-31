@@ -1,4 +1,4 @@
-package symbolic.segments;
+package symbolic.segments.by_length;
 
 import symbolic.GridSegment;
 
@@ -12,5 +12,5 @@ public interface SegmentsByLength {
 
     GridSegment getKthFittingSpace(int spaceSize, int k);
 
-    void freeArraysIfCleanedUp();
+    void destroy();
 }

@@ -1,6 +1,7 @@
-package symbolic.segments;
+package symbolic.segments.by_length.segtree_implementation;
 
 import symbolic.GridSegment;
+import symbolic.segments.by_length.SegmentsByLength;
 
 import java.util.*;
 

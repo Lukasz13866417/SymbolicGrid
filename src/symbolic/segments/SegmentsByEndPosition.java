@@ -35,12 +35,19 @@ public class SegmentsByEndPosition {
 
     public GridSegment[] reserve(int row, int col, int length) {
 
+        if(vertical){
+            System.out.println("VERTICAL");
+        }else{
+            System.out.println("HORIZONTAL");
+        }
         GridSegment candidate = bestFit(row, col);
+        System.out.println(candidate);
 
         int cStart = vertical ? candidate.row : candidate.col, start = vertical ? row : col;
         int cLength = candidate.length;
         int cOther = vertical ? candidate.col : candidate.row, other = vertical ? col : row;
-
+        System.out.println(cStart+","+cLength+","+cOther);
+        System.out.println(start+","+other+","+length);
         if (cStart > start || cOther != other || cStart + cLength - 1 < start + length - 1) {
             throw new IllegalArgumentException("No space available for this segment");
         }
