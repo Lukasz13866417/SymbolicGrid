@@ -12,12 +12,10 @@ Allows for the following operations: <br>
 ## Future:
 - The internal data structures can be used to allow the user to make segments *free* again!
 - These operations will have the same time complexity as the current ones
-
-
-Removing either all horizontal segment queries or all vertical segment queries would **remove the linear factor** from all queries. The most important class in the implementation, the ```PartialSegementHandler```, does queries for just one "orientation" of segments (all vertical / all horizontal) and does everything in logarithmic time. 
-However, the linear factors become negligible if you actually do something later with the reserved positions. Then, due to the disjointness of the reserved segments, you need the same amount of time as the sum of the linear factors in the performed queries. In that case, my solution only takes "logarithmically" more time than the amount of time you put in anyway.
-
 ## Internal data structures used (overview):
 - **Sparse segment trees** with advanced queries, using **hashing** to represent information about the *free* subsegments (but only the ones that can't be extended - from each side they either touch the border or a *reserved* position)
 - **Preallocated Node Pool** for the segment tree to avoid frequent allocations and annoying the Java Garbage Collector.
 - **Balanced BST** storing information about the end position of mentioned free segments. Currently a bulitin tree set.
+### Why linear factors don't matter here:
+Removing either all horizontal segment queries or all vertical segment queries would **remove the linear factor** from all queries. The most important class in the implementation, the ```PartialSegementHandler```, does queries for just one "orientation" of segments (all vertical / all horizontal) and does everything in logarithmic time. 
+However, the linear factors become negligible if you actually do something later with the reserved positions. Then, due to the disjointness of the reserved segments, you need the same amount of time as the sum of the linear factors in the performed queries. In that case, my solution only takes "logarithmically" more time than the amount of time you put in anyway.
