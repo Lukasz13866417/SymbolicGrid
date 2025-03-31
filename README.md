@@ -12,6 +12,7 @@ To use this API, simply copy the package "symbolic" into your project - it has e
 ## Example usage:
 ### Code:
 ```Java
+// Create grid with 7 rows, 5 cols
 GridCreator parent = new GridCreator(7,5);
 parent.reserveVertical(2,2,2);
 parent.reserveHorizontal(1,1,4);
@@ -23,7 +24,11 @@ parent.reserveRandomFittingHorizontal(3);
 parent.printGrid();
 ```
 ```Java
+// Create child grid - 4 rows, 5 cols
+// It will be inside the first grid, with offset 3
+// So, it will cover rows 4,5,6,7.
 GridCreator child = new GridCreator(4,5,parent,3);
+// Position (4,5) in child is (7,5) in parent.
 child.reserveVertical(4,5,1);
 parent.printGrid(); 
 ```
