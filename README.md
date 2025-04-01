@@ -33,7 +33,7 @@ To use this API, simply copy the package `symbolic` into your project. It includ
 ## Example Usage
 
 ### Code:
-Reserving concrete segments:
+Reserving specific segments:
 ```Java
 import symbolic.GridCreator;
 
@@ -55,7 +55,7 @@ GridCreator child = new GridCreator(4, 5, parent, 3);
 child.reserveVertical(4, 5, 1);
 parent.printGrid();
 ```
-Reserving random fitting segments
+Reserving random fitting segments:
 ```Java
 GridCreator another = new GridCreator(7,5);
 another.reserveHorizontal(2,2,3);
