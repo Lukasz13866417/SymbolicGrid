@@ -102,7 +102,7 @@ parent.destroy();
 When you're done using a specific instance of `GridCreator`, call `destroy()` on it! The class uses preallocation in its data structures to optimize performance by increasing **cache locality, reducing allocations and garbage collector usage**. If the preallocated pool of memory runs out, it will resize. Calling `destroy()` allows the memory to be reused. Not doing so may cause extra resizings. You are welcome to adjust the preallocated memory size in the code. A smaller preallocation size introduces minimal overhead while maintaining a logarithmic number of resizings.
 
 ## Future Enhancements
-
+The most important and challenging functionality has been achieved. Here are things that can be added too:
 - **Freeing Segments:**  
   Allow users to make segments *free* again, with the same time complexity as current queries.
 
