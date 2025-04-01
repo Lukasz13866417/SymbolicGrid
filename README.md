@@ -111,7 +111,7 @@ When you're done using a specific instance of `GridCreator`, call `destroy()` on
 ## Future Enhancements
 The most important and challenging functionality has been achieved. Here are things that can be added too:
 - **Freeing Segments:**  
-  Allow users to make segments *free* again, with the same time complexity as current queries.
+  Allow users to make segments *free* again. It can be done with the existing data structures and the same time complexity as current queries.
 
 - **Flexible Child Grids:**  
   Modify `GridCreator` to allow the child grid to be created in an area that is not entirely free, or to have a different number of columns than the parent and be placed anywhere within it.
