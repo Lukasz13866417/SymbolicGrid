@@ -110,7 +110,7 @@ The most important and challenging functionality has been achieved. Here are thi
   Modify `GridCreator` to allow the child grid to be created in an area that is not entirely free, or to have a different number of columns than the parent and be placed anywhere within it.
 
 - **Dynamic Row Increases:**  
-  Add a query to increase the number of rows. While the time complexities remain the same, the constant factors may grow due to the new data structure requirements.
+  Add a query to increase the number of rows. While the time complexities remain the same, the constant factors may grow substantially due to new data structures (most likely BSTs with lazy propagation).
 
 ## Internal Data Structures Overview
 
