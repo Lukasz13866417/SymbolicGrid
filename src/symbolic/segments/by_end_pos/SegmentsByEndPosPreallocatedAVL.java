@@ -12,6 +12,7 @@ public class SegmentsByEndPosPreallocatedAVL {
     private int root = -1;
     // Works without extra info stored (like about parent) because our nodes are freed when the whole structure is freed
     // (explained in a comment later in the code)
+    // TODO use dependency injection to let the user decide what pool to use.
     private static final NodePool pool = new NodePool(NODE_POOL_SIZE);
     private final boolean vertical;
     private final Comparator<GridSegment> comparator;

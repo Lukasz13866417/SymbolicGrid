@@ -7,7 +7,7 @@ import static symbolic.GridCreator.NODE_POOL_SIZE;
 public class PreallocatedHashedSegmentsByLengthNodes extends HashedSegmentsByLength {
 
     private final int LEAF_CNT;
-
+    // TODO use dependency injection to let the user decide what pool to use.
     private static final NodePool NODE_POOL = new NodePool(NODE_POOL_SIZE);
 
     private final int rootInd;

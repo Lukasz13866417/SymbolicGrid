@@ -4,6 +4,7 @@ import symbolic.GridSegment;
 import symbolic.segments.by_end_pos.SegmentsByEndPosition;
 import symbolic.segments.by_length.segtree_implementation.PreallocatedHashedSegmentsByLengthNodes;
 import symbolic.segments.by_length.SegmentsByLength;
+import symbolic.segments.util.RNG;
 
 import java.util.Random;
 
@@ -48,7 +49,7 @@ public class PartialSegmentHandler {
 
     public GridSegment reserveRandomFitting(int length) {
         int total = segmentsByLength.countFittingSpaces(length);
-        int k = new Random().nextInt(total)+1;
+        int k = RNG.randInt(1,total);
         GridSegment found = segmentsByLength.getKthFittingSpace(length,k);
         reserve(found.row, found.col, length);
         return found;
