@@ -2,14 +2,14 @@ package symbolic.segments.by_length.segtree_implementation;
 
 class NodePool {
     private Node[] nodes;
-    private final PreallocatedResizableArrayDeque<Integer> freeIndices;
+    private final PreallocatedResizableArrayStack freeIndices;
 
     public NodePool(int initialCapacity) {
         nodes = new Node[initialCapacity];
         for (int i = 0; i < initialCapacity; i++) {
             nodes[i] = new Node(i);
         }
-        freeIndices = new PreallocatedResizableArrayDeque<>(initialCapacity);
+        freeIndices = new PreallocatedResizableArrayStack(initialCapacity);
         for (int i = initialCapacity - 1; i >= 1; i--) {
             freeIndices.pushBack(i);
         }
