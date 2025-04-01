@@ -3,7 +3,7 @@ package symbolic;
 import symbolic.segments.PartialSegmentHandler;
 
 public class GridCreator {
-
+    public static final int NODE_POOL_SIZE = 10000;
     private final PartialSegmentHandler vertical, horizontal;
     private final GridCreator parent;
     private final int parentRowOffset;

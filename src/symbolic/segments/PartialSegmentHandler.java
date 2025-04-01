@@ -1,6 +1,7 @@
 package symbolic.segments;
 
 import symbolic.GridSegment;
+import symbolic.segments.by_end_pos.SegmentsByEndPosition;
 import symbolic.segments.by_length.segtree_implementation.PreallocatedHashedSegmentsByLengthNodes;
 import symbolic.segments.by_length.SegmentsByLength;
 
@@ -58,10 +59,10 @@ public class PartialSegmentHandler {
     }
 
     public void flush(){
-        while(!segmentsByEndPosition.tree.isEmpty()){
+        /*while(!segmentsByEndPosition.tree.isEmpty()){
             GridSegment curr = segmentsByEndPosition.tree.pollFirst();
             segmentsByLength.delete(curr.row,curr.col,curr.length);
-        }
+        }*/
         segmentsByLength.destroy();
     }
 

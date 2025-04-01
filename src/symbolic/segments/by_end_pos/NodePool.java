@@ -1,5 +1,6 @@
-package symbolic.segments.by_length.segtree_implementation;
+package symbolic.segments.by_end_pos;
 
+import symbolic.GridSegment;
 import symbolic.segments.util.PreallocatedResizableArrayStack;
 
 class NodePool {
@@ -17,12 +18,14 @@ class NodePool {
         }
     }
 
-    public int newNode() {
+    public int newNode(GridSegment segment) {
         if (freeIndices.isEmpty()) {
             expandPool();
         }
         int index = freeIndices.popLast();
-        nodes[index].clear();
+        Node node = nodes[index];
+        node.clear();
+        node.segment = segment;
         return index;
     }
 

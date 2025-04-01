@@ -1,4 +1,4 @@
-package symbolic.segments.by_length.segtree_implementation;
+package symbolic.segments.util;
 
 public class PreallocatedResizableArrayStack {
 

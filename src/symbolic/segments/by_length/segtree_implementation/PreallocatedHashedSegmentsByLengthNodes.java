@@ -2,11 +2,13 @@ package symbolic.segments.by_length.segtree_implementation;
 
 import symbolic.GridSegment;
 
+import static symbolic.GridCreator.NODE_POOL_SIZE;
+
 public class PreallocatedHashedSegmentsByLengthNodes extends HashedSegmentsByLength {
 
     private final int LEAF_CNT;
 
-    private static final NodePool NODE_POOL = new NodePool(100000);
+    private static final NodePool NODE_POOL = new NodePool(NODE_POOL_SIZE);
 
     private final int rootInd;
     private final Node root;

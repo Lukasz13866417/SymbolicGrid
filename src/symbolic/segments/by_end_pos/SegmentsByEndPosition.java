@@ -1,36 +1,19 @@
-package symbolic.segments;
+package symbolic.segments.by_end_pos;
 
 
 import symbolic.GridSegment;
 
-import java.util.TreeSet;
-
 public class SegmentsByEndPosition {
 
     private final boolean vertical;
-    final TreeSet<GridSegment> tree;
+    final SegmentsByEndPosPreallocatedAVL tree;
     private int nRows, nCols;
 
     public SegmentsByEndPosition(int nRows, int nCols, boolean vertical) {
         this.nRows = nRows;
         this.nCols = nCols;
         this.vertical = vertical;
-        if (vertical) {
-            this.tree = new TreeSet<>((GridSegment a, GridSegment b) -> {
-                if (a.col != b.col) {
-                    return Integer.compare(a.col, b.col);
-                }
-                return Integer.compare(a.row + a.length, b.row + b.length); // End pos is actually row + len - 1
-                // But I removed it from here for extra tiny optimization
-            });
-        } else {
-            this.tree = new TreeSet<>((GridSegment a, GridSegment b) -> {
-                if (a.row != b.row) {
-                    return Integer.compare(a.row, b.row);
-                }
-                return Integer.compare(a.col + a.length, b.col + b.length);
-            });
-        }
+        this.tree = new SegmentsByEndPosPreallocatedAVL(vertical);
     }
 
     public GridSegment[] reserve(int row, int col, int length) {
@@ -50,7 +33,7 @@ public class SegmentsByEndPosition {
             if (newLength != 0) {
                 int newStart = cStart + length;
                 GridSegment replacement = vertical ? GridSegment.GS(newStart, other, newLength) : GridSegment.GS(other, newStart, newLength);
-                tree.add(replacement);
+                tree.insert(replacement);
                 return new GridSegment[]{candidate, replacement, null};
             }
             return new GridSegment[]{candidate, null, null};
@@ -59,13 +42,13 @@ public class SegmentsByEndPosition {
             GridSegment replacement1 = null, replacement2 = null;
             if (len1 > 0) {
                 replacement1 = vertical ? GridSegment.GS(cStart, cOther, len1) : GridSegment.GS(cOther, cStart, len1);
-                tree.add(replacement1);
+                tree.insert(replacement1);
             }
             int len2 = cStart + cLength - 1 - (start + length - 1);
             if (len2 > 0) {
                 int newStart = start + length;
                 replacement2 = vertical ? GridSegment.GS(newStart, cOther, len2) : GridSegment.GS(cOther, newStart, len2);
-                tree.add(replacement2);
+                tree.insert(replacement2);
             }
             return new GridSegment[]{candidate, replacement1, replacement2};
         }
@@ -73,7 +56,7 @@ public class SegmentsByEndPosition {
     }
 
     public void insert(int row, int col, int length) {
-        tree.add(new GridSegment(row, col, length));
+        tree.insert(new GridSegment(row, col, length));
     }
 
     private GridSegment bestFit(int row, int col) {
@@ -94,14 +77,14 @@ public class SegmentsByEndPosition {
         return null;
     }
 
-    void printGrid(){
+    public void printGrid(){
         char[][] grid = new char[nRows][nCols];
         for(int r=0;r<nRows;r++){
             for(int c=0;c<nCols;c++){
                 grid[r][c] = '#';
             }
         }
-        for(GridSegment seg : tree){
+        for(GridSegment seg : tree.getAllSegments()){
             int row = seg.row-1, col = seg.col-1, len = seg.length;
             for(int i=0;i<len;++i){
                 if(vertical){
