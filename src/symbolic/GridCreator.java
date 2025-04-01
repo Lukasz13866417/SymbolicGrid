@@ -70,10 +70,6 @@ public class GridCreator {
         horizontal.flush();
     }
 
-    public void pushUp(){
-
-    }
-
 
     public static void main(String[] args) {
         GridCreator parent = new GridCreator(7,5);
