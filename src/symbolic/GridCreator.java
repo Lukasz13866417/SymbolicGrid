@@ -65,30 +65,50 @@ public class GridCreator {
         horizontal.printGrid(); // can also be vertical.printGrid(), since they represent the same grid
     }
 
-    public void destroy(){
+    public void destroy() {
         vertical.flush();
         horizontal.flush();
     }
 
 
+    /**
+     * Example usage, same as in README
+     */
     public static void main(String[] args) {
-        GridCreator parent = new GridCreator(7,5);
-        parent.reserveVertical(2,2,2);
-        parent.reserveHorizontal(1,1,4);
+
+        // Create grid with 7 rows, 5 cols
+        GridCreator parent = new GridCreator(7, 5);
+        // Args for both methods: row, column, length
+        parent.reserveVertical(2, 2, 2);
+        parent.reserveHorizontal(1, 1, 4);
 
         parent.printGrid();
-        System.out.println("\n-------------------------\n");
 
-        parent.reserveRandomFittingHorizontal(3);
-        parent.printGrid();
-        System.out.println("\n-------------------------\n");
+        System.out.println();
+        System.out.println("------------------------------");
+        System.out.println();
 
-        GridCreator child = new GridCreator(4,5,parent,3);
-        child.reserveVertical(4,5,1);
+        // Create child grid - 4 rows, 5 cols
+        // It will be inside the first grid, with an offset of 3,
+        // covering rows 4, 5, 6, and 7.
+        GridCreator child = new GridCreator(4, 5, parent, 3);
+        // Position (4,5) in the child grid corresponds to (7,5) in the parent grid.
+        child.reserveVertical(4, 5, 1);
         parent.printGrid();
+
+        System.out.println();
+        System.out.println("------------------------------");
+        System.out.println();
+
+        GridCreator another = new GridCreator(7, 5);
+        another.reserveHorizontal(2, 2, 3);
+        // Re-running will cause it to appear in different places
+        GridSegment randomFitting = another.reserveRandomFittingVertical(3);
+        another.printGrid();
 
         child.destroy();
         parent.destroy();
+        another.destroy();
     }
 
 }
