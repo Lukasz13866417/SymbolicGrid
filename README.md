@@ -120,12 +120,13 @@ The most important and challenging functionality has been achieved. Here are thi
   Add a query to increase the number of rows. While the time complexities remain the same, the constant factors may grow substantially due to new data structures (most likely BSTs with lazy propagation).
 
 ## Internal Data Structures Overview
-
+- **Partial segment handlers** <br>
+they basically provide the same API as the ```GridCreator```, but only for segments of **a given orientation** (e.g only vertical segments or only horizontal segments). A ```PartialSegmentHandler``` stores information about *maximal free segments* (*maximal* = only those that can't be extended—i.e., from each side they either touch the border or a *reserved* position). <br>A ```GridCreator``` is composed of two partial handlers - one for vertical free segments, another for horizontal ones. Both handlers represent the same grid. The remaining data structures are used internally in a partial handler.
 - **Sparse Segment Trees:**  
-  Advanced queries using **hashing** to represent the *free* subsegments (only those that can't be extended—i.e., from each side they either touch the border or a *reserved* position).
+  Advanced queries using **hashing** to represent the *free* subsegments. I chose a hashing function that always gives longer segments a greater hash value. Hash values are stored in the segment tree. A segment is easy to recreate from its hash.
 
 - **Balanced BST:**  
-  A custom AVL stores information about the end positions of the free segments.
+  A custom AVL stores information about the end positions of the free segments (orderes them by end position, whereas the segtree ordered primarily by length). Both trees store the same segments.
 
 - **Preallocated Node Pools:**  
   These help avoid frequent allocations and minimizes the impact on the Java Garbage Collector. They are used both in
@@ -135,7 +136,7 @@ the segtrees and the BSTs.
 ### Why $d$ in Time Complexity doesn't matter in practice:
 
 The $d$ factors are almost negligible if you perform further operations on the reserved positions. Given the disjoint nature of the reserved segments, the overhead is proportional to the amount of processing done on the resulting segments. <br>
-If you choose to perform only horizontal queries followed by vertical ones (or vice versa), the structure can be further modified to achieve completely logarithmic time by utilizing the `PartialSegementHandler` class, which handles all queries for one orientation in logarithmic time. I plan to outline this enhancement or provide modified code in the future.
+If you choose to perform only horizontal queries followed by vertical ones (or vice versa), the structure can be further modified to achieve completely logarithmic time by utilizing the `PartialSegementHandler` class, which handles all queries in logarithmic time. I plan to outline this enhancement or provide modified code in the future.
 
 ## License
 
