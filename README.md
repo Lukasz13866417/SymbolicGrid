@@ -1,6 +1,6 @@
 # Robust API for Logarithmic-Time 2D Grid Queries
 
-The grid can be used to represent a maze or any layout of non-overlapping "tiles" in systems where **randomization** is needed. In this grid, a position is either *reserved* or *free*. I used this as part of my custom, sophisticated terrain generation API for my game. See: [project repo](https://github.com/Lukasz13866417/Game3D_OpenGL)
+The grid can be used to represent a maze or any layout of non-overlapping "tiles" in systems where **randomization** is needed. In this grid, a position is either *reserved* or *free*. I used this as **part of my custom, sophisticated terrain generation API for my game.** See: [project repo](https://github.com/Lukasz13866417/Game3D_OpenGL)
 
 To use this API, simply copy the package `symbolic` into your project. It includes everything you need, including the `GridCreator` class. There are no external dependencies.
 
