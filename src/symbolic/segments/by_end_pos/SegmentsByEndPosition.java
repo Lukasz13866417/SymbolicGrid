@@ -6,8 +6,9 @@ import symbolic.GridSegment;
 public class SegmentsByEndPosition {
 
     private final boolean vertical;
-    final SegmentsByEndPosPreallocatedAVL tree;
-    private int nRows, nCols;
+    private final SegmentsByEndPosPreallocatedAVL tree;
+    private final int nRows;
+    private final int nCols;
 
     public SegmentsByEndPosition(int nRows, int nCols, boolean vertical) {
         this.nRows = nRows;
@@ -19,7 +20,9 @@ public class SegmentsByEndPosition {
     public GridSegment[] reserve(int row, int col, int length) {
 
         GridSegment candidate = bestFit(row, col);
-
+        if(candidate == null){
+            throw new IllegalArgumentException("no candidate found");
+        }
         int cStart = vertical ? candidate.row : candidate.col, start = vertical ? row : col;
         int cLength = candidate.length;
         int cOther = vertical ? candidate.col : candidate.row, other = vertical ? col : row;
@@ -99,4 +102,7 @@ public class SegmentsByEndPosition {
         }
     }
 
+    public void destroy() {
+        tree.destroy();
+    }
 }

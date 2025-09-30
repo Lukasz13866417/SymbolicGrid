@@ -60,11 +60,8 @@ public class PartialSegmentHandler {
     }
 
     public void flush(){
-        /*while(!segmentsByEndPosition.tree.isEmpty()){
-            GridSegment curr = segmentsByEndPosition.tree.pollFirst();
-            segmentsByLength.delete(curr.row,curr.col,curr.length);
-        }*/
         segmentsByLength.destroy();
+        segmentsByEndPosition.destroy();
     }
 
 

@@ -21,7 +21,7 @@ public class GridCreator {
 
     public void reserveVertical(int row, int col, int length) {
         if (parent != null) {
-            parent.reserveHorizontal(row + parentRowOffset, col, length);
+            parent.reserveVertical(row + parentRowOffset, col, length);
         }
         vertical.reserve(row, col, length);
         for (int r = row; r < row + length; r++) {

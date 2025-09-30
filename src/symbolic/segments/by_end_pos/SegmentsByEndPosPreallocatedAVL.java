@@ -169,6 +169,7 @@ public class SegmentsByEndPosPreallocatedAVL {
 
     public void destroy() {
         destroyRec(root);
+        root = -1;
     }
 
     private void destroyRec(int nodeIndex) {
