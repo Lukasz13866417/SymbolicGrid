@@ -1,5 +1,5 @@
 > **UPDATE: REWRITTEN IN C++ WITH EXTRA OPTIMIZATIONS FOR MAX SPEED**
-> - Will update Readme soon with section dedicated to these opts.
+> - Soon will add README in `cpp/` with description of these opts.
 > - Base algorithm is the same.
 > - C++ API is analogous to Java 
 
