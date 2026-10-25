@@ -1,7 +1,7 @@
 > **UPDATE: REWRITTEN IN C++ WITH EXTRA OPTIMIZATIONS FOR MAX SPEED**
-> Will update Readme soon with section dedicated to these opts.
-> Base algorithm is the same.
-> C++ API is analogous to Java 
+> - Will update Readme soon with section dedicated to these opts.
+> - Base algorithm is the same.
+> - C++ API is analogous to Java 
 
 # Clean API for Logarithmic-Time 2D Grid Queries
 
