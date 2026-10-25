@@ -1,14 +1,16 @@
 > **UPDATE: REWRITTEN IN C++ WITH EXTRA OPTIMIZATIONS FOR MAX SPEED**
 > - Soon will add README in `cpp/` with description of these opts.
 > - Base algorithm is the same.
-> - C++ API is analogous to Java 
+> - C++ API is analogous to Java
+
+> **UPDATE: To prevent the game from being plagarized with AI, its repo is private as of Aug 2026.**
+> \
+> **My game's terrain generation code is closed-source now too.**
 
 # Clean API for Logarithmic-Time 2D Grid Queries
 
 The grid can be used to represent a maze or any layout of non-overlapping "tiles" in systems where **randomization** is needed. In this grid, a position is either *reserved* or *free*. I used this as **part of my custom, sophisticated terrain generation API for my game.** See: [project repo](https://github.com/Lukasz13866417/Game3D_OpenGL)
-> **UPDATE: To prevent the game from being plagarized with AI, that repo is private as of Aug 2026.**
-> \
-> **My game's terrain generation code is closed-source now too.**
+
 
 To use this API, simply copy the package `symbolic` into your project. It includes everything you need, including the `GridCreator` class. There are no external dependencies.
 
