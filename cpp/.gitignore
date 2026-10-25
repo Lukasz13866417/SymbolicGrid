@@ -1,0 +1,2 @@
+# CMake build directories: build, build-sanitize, build-android, etc.
+/build*/
